@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list">
-    <good-list-item v-for="item in goods" :good="item"></good-list-item>
+    <good-list-item v-for="item in goods" :good="item" :isShowBtn="isShowBtn"></good-list-item>
   </div>
 </template>
 
@@ -13,6 +13,10 @@
         default(){
           return []
         }
+      },
+      isShowBtn: {
+        type: Boolean,
+        default: true
       }
     },
     components: {

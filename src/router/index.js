@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
+const originalReplace = VueRouter.prototype.replace;
+VueRouter.prototype.replace = function replace(location) {
+    return originalReplace.call(this, location).catch(err => err);
+};
+
 const Home = () => import('views/Home/Home');
 const Category = () => import('views/Category/Category');
 const Cart = () => import('views/Cart/Cart');
@@ -16,20 +21,25 @@ const router = new VueRouter({
       redirect: "/home"
     },
     {
+      name:'home',
       path: '/home',
-      component: Home
+      component: Home,
     },{
+      name:'category',
       path: '/category',
-      component: Category
+      component: Category,
     },{
+      name:'cart',
       path: '/cart',
-      component: Cart
+      component: Cart,
     },{
+      name:'profile',
       path: '/profile',
-      component: Profile
+      component: Profile,
     },{
+      name:'detail',
       path:'/detail',
-      component: Detail
+      component: Detail,
     }
   ],
   mode: 'history'

@@ -10,6 +10,8 @@
   import BScroll from '@better-scroll/core'
   import Pullup from '@better-scroll/pull-up'
 
+  import {debounce} from 'common/utils'
+
   BScroll.use(Pullup)
   export default {
     name: "scroll",
@@ -35,13 +37,18 @@
           pullUpLoad: this.pullUpLoad
         });
 
-        this.scroll.on('scroll',(position) => {
+        const scroller = debounce((position) => {
           this.$emit("scroll",position);
-        });
-
-        this.scroll.on('pullingUp',() => {
+        },100);
+        const puller = debounce((position) => {
           this.$emit("pullingUp");
-        })
+        },100);
+
+        if(this.probeType !== 0)
+        this.scroll.on('scroll',scroller);
+
+        if(this.pullUpLoad) 
+        this.scroll.on('pullingUp',puller);
     },
     methods: {
       scrollTo(x,y,time=300){
@@ -58,4 +65,7 @@
 </script>
 
 <style scoped>
+  .wrapper{
+    overflow: hidden;
+  }
 </style>

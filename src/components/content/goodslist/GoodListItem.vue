@@ -1,24 +1,49 @@
 <template>
   <div class="goods-list-item">
-    <a href="" class="link">
-      <img class="good-img" :src="good.show.img" @load="imgLoad"/>
+    <a class="link" @click="itemCLick">
+      <img class="good-img" v-lazy="imgSrc" @load="imgLoad"/>
       <div class="info">
-        <p class="title">{{good.title}}</p>
+        <p class="title text-ellipsis">{{good.title}}</p>
         <div>
           <span class="price">￥{{good.price}}</span>
           <span class="cfav">{{good.cfav}}<img src="~assets/images/common/collect.svg"></span>
         </div>
-        <div class="btn">立即购买</div>
+        <div class="btn" v-show="isShowBtn">立即购买</div>
       </div>
     </a>
   </div>
 </template>
 <script>
   export default {
-    props: ["good"],
+    props: {
+      good: {
+        type: Object,
+        default(){
+          return {}
+        }
+      },
+      isShowBtn: {
+        type: Boolean,
+        default: true
+      }
+    },
+    computed: {
+      imgSrc(){
+        return this.good.img || this.good.image || this.good.show.img
+      }
+    },
     methods: {
       imgLoad(){
         this.$bus.$emit("imgLoaded")
+      },
+      itemCLick(){
+        const op = {
+          path: "/detail",
+          query: {
+            id: this.good.iid || this.good.item_id
+          }
+        };
+        this.$router.push(op);
       }
     }
   }
@@ -43,11 +68,6 @@
   .info{
     padding: 4px 6px;
     background-color: #fff;
-  }
-  .title{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
   .price{
     font-size: 15px;

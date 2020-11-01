@@ -41,4 +41,7 @@
   .tab-control-item{
     flex:1;
   }
+  .tab-control-item > span{
+    padding: 8px 15px;
+  }
 </style>

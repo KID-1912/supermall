@@ -51,17 +51,14 @@
 
       setTimeout(() => {
         document.addEventListener("visibilitychange",() =>{
-          if(document.visibilityState=="visible"){
-              this.autoSlider();
-          }else{
-              clearInterval(this.timer);
-          }
-        })
+          if(document.visibilityState=="visible") return this.autoSlider();
+          clearInterval(this.timer);
+        });
         // 轮播图初始化
         this._handleDom();
         // 开启自动轮播
-        this.autoSlider()
-      },1000)
+        this.autoSlider();
+      },1000);
     },
     methods: {
       _handleDom(){
@@ -182,11 +179,10 @@
     position: absolute;
     left:50%;
     bottom:2%;
-    transform: translateX(-50%);
-  }
-  .swipper-indicator-wrap{
     font-size: 0;
     line-height: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
   .swipper-indicator{
     display: inline-block;

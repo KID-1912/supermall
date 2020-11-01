@@ -3,9 +3,7 @@
     <nav-bar class="home-navbar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <tab-control v-show="isTop" class="tab-control" ref="tabControl1" 
-    :titles="['综合','销量','新品']"
-    @tabclick="tabclick"></tab-control>
+    <tab-control v-show="isTop" class="tab-control1" ref="tabControl1" :titles="['综合','销量','新品']" @tabclick="tabclick"/>
     <scroll class="scroll-wrapper" ref="scroll" :probeType="3" :pullUpLoad="true" @scroll="scroll" @pullingUp="getMore">
       <home-swipper ref="swipper" class="home-swipper" :banners="banners" @swipperImgLoad="getTabControlTop"></home-swipper>
       <home-recommend :recommends="recommends"></home-recommend>
@@ -15,7 +13,7 @@
       @tabclick="tabclick"></tab-control>
       <goods-list :goods="showgoods"></goods-list>
     </scroll>
-    <back-top ref="backtop" v-show="isShowBackTop" @click.native="backTop"></back-top>
+    <back-top ref="backtop" v-show="isShowBackTop" @click.native="backTop"/>
   </div>
 </template>
 
@@ -25,7 +23,6 @@
   import tabcontrol from 'components/common/tabcontrol/TabControl'
   import goodslist from 'components/content/goodslist/GoodsList'
   import scroll from 'components/common/scroll/Scroll'
-  import backtop from 'components/content/backtop/BackTop'
 
   // childComps
   import homeswipper from './childComps/HomeSwipper'
@@ -35,10 +32,11 @@
   // function
   import {getHomeMultidata} from 'network/home.js'
   import {getHomeGoods} from 'network/home.js'
-  import {debounce} from 'common/utils'
+  import {goodsItemListenerMixin,backTopMixin} from 'common/mixin'
 
   export default {
     name: "home",
+    mixins: [goodsItemListenerMixin,backTopMixin],
     data(){
       return {
         banners: [],
@@ -50,11 +48,10 @@
           new: {page: 0,list: []}
         },
         currentType: "pop",
-        isShowBackTop: false,
         refreshed: true,
         tabControlTop: 0,
         isTop: false,
-        scrollTop: 0
+        scrollTop: 0,
       }
     },
     computed: {
@@ -71,23 +68,23 @@
       this.getHomeGoods('new');
       this.getHomeGoods('sell');
 
-      //订阅goodslistitem图片加载完成事件
-      const refresh = debounce(this.refresh,150);
-      this.$bus.$on("imgLoaded",() => {
-        refresh();
-      })
     },
     mounted(){
       // 
     },
-    activated(){
+    activated(){//缓存激活时处理
       this.$refs.scroll.scrollTo(0,this.scrollTop,0);
       this.$refs.scroll.refresh();
       this.$refs.swipper.startSwipper();
+
+      this.$bus.$off("imgLoaded",this.goodsItemListener);
+      this.$bus.$on("imgLoaded",this.goodsItemListener);
     },
-    deactivated(){
+    deactivated(){//视图离开时处理
       this.scrollTop = this.$refs.scroll.scroll.y;
       this.$refs.swipper.stopSwipper();
+
+      this.$bus.$off("imgLoaded",this.goodsItemListener);
     },
     methods:{
       // 请求数据处理
@@ -103,10 +100,10 @@
         let page = this.goods[type].page + 1;
         getHomeGoods(type,page).then(result => {
           console.log(`请求了${type}的第${page}页面`);
-          this.refreshed = false;
           let goodsList = result.data.list;
           this.goods[type].page++;
           this.goods[type].list = this.goods[type].list.concat(goodsList);
+          this.refreshed = false;
         });
       },
 
@@ -125,17 +122,9 @@
         // 是否替换显示吸附的tabControl1
         this.isTop = Math.abs(position.y) >= this.tabControlTop
       },
-      backTop(){
-        this.$refs.scroll.scrollTo(0,0);
-      },
       getMore(){
         this.getHomeGoods(this.currentType);
         this.$refs.scroll.finishPullUp();
-      }, 
-      refresh(){
-        this.$refs.scroll.refresh();
-        console.log("refreshed");
-        this.refreshed = true;
       },
       getTabControlTop(){
         setTimeout(() => {
@@ -152,7 +141,6 @@
       tabControl: tabcontrol,
       goodsList: goodslist,
       scroll,
-      backTop: backtop
     }
   }
 </script>
@@ -160,13 +148,12 @@
 <style scoped>
   #home{
     position: relative;
-    height: 100vh;
+    height: 100%;
   }
   .scroll-wrapper{
     position: absolute;
     width: 100%;
     top:44px;bottom:49px;
-    overflow: hidden;
   }
   .home-navbar{
     color:#fff;
@@ -182,7 +169,6 @@
     z-index: 1;
   }
   .tab-control /deep/.tab-control-item.active span{
-    padding: 8px 15px;
     color: #ff5777;
     border-bottom: 2px solid #ff8198;
   }

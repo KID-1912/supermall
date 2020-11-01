@@ -19,7 +19,6 @@
     height: 44px;
     line-height: 44px;
     text-align: center;
-    z-index:1;
   }
   .right,.left{
     width: 60px;

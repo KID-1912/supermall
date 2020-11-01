@@ -20,7 +20,7 @@
     display: flex;
     margin-top: 8px;
     padding-bottom: 8px;
-    border-bottom: 10px solid #eee;
+    border-bottom: 10px solid var(--color-gray);
   }
   .recommend-item{
     flex:1;
