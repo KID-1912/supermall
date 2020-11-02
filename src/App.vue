@@ -11,6 +11,11 @@
   import maintabbar from 'components/content/mainTabBar/mainTabBar'
   export default {
     name: 'App',
+    mounted(){
+      window.addEventListener('resize',function () {
+        location.reload();
+      })
+    },
     components: {
       maintabbar
     }
