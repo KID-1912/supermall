@@ -42,7 +42,8 @@ const router = new VueRouter({
       component: Detail,
     }
   ],
-  mode: 'history'
+  mode: 'history',
+  base: "/supermall/"
 });
 
 export default router; 
