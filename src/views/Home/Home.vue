@@ -70,8 +70,8 @@
 
     },
     activated(){//缓存激活时处理
-      this.$refs.scroll.scrollTo(0,this.scrollTop,0);
       this.$refs.scroll.refresh();
+      if(this.scrollTop) this.$refs.scroll.scrollTo(0,this.scrollTop,0);
       this.$refs.swipper.startSwipper();
 
       this.$bus.$off("imgLoaded",this.goodsItemListener);

@@ -58,6 +58,7 @@
         this.scroll.refresh();
       },
       finishPullUp(){
+        this.scroll.refresh();
         this.scroll.finishPullUp();
       }
     }
