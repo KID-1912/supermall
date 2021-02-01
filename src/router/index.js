@@ -8,7 +8,7 @@ VueRouter.prototype.replace = function replace(location) {
     return originalReplace.call(this, location).catch(err => err);
 };
 
-const Home = () => import('views/Home/Home');
+import Home from 'views/Home/Home';
 const Category = () => import('views/Category/Category');
 const Cart = () => import('views/Cart/Cart');
 const Profile = () => import('views/Profile/Profile');

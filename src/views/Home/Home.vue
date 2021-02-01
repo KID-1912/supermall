@@ -13,7 +13,7 @@
       @tabclick="tabclick"></tab-control>
       <goods-list :goods="showgoods"></goods-list>
     </scroll>
-    <back-top ref="backtop" v-show="isShowBackTop" @click.native="backTop"/>
+    <back-top ref="backtop" v-show="isShowBackTop" @backtop="backTop"/>
   </div>
 </template>
 
@@ -68,9 +68,6 @@
       this.getHomeGoods('new');
       this.getHomeGoods('sell');
 
-    },
-    mounted(){
-      // 
     },
     activated(){//缓存激活时处理
       this.$refs.scroll.scrollTo(0,this.scrollTop,0);

@@ -10,8 +10,6 @@
 <script>
   export default {
     props: ["recommends"],
-    methods: {
-    }
   }
 </script>
 

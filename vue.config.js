@@ -9,5 +9,8 @@ module.exports = {
         'views': '@/views'
       }
     }
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+  ? '/supermall/'
+  : '/'
 }

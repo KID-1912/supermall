@@ -1,5 +1,5 @@
 <template>
-  <div class="back-top">
+  <div class="back-top" @click="() => $emit('backtop')">
     <img src="~assets/images/common/top.png" alt="回到顶部">
   </div>
 </template>
