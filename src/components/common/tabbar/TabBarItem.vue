@@ -8,16 +8,16 @@
 export default {
   name: "tabbarItem",
   props: {
-    path: String
+    name: String
   },
   computed: {
     isActive(){
-      return this.$route.path.includes(this.path)
+      return this.$route.name.includes(this.name)
     }
   },
   methods: {
     toRoute(){
-      this.$router.replace(this.path);
+      this.$router.replace({name: this.name});
     }
   }
 }

@@ -13,7 +13,7 @@
     name: 'App',
     mounted(){
       window.addEventListener('resize',function () {
-        location.replace('http://xiyitao.top/supermall');
+        window.location.href='//xiyitao.top/supermall'
       })
     },
     components: {

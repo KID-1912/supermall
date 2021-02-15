@@ -1,18 +1,18 @@
 <template>
   <tabbar>
-    <tabbarItem path="/home">
+    <tabbarItem name="home">
       <i class="icon iconhomepage"></i>
       <span class="text">首页</span>
     </tabbarItem>
-    <tabbarItem path="/category">
+    <tabbarItem name="category">
       <i class="icon iconleibie"></i>
       <span class="text">分类</span>
-    </tabbarItem path="/cart">
-    <tabbarItem path="/cart">
+    </tabbarItem>
+    <tabbarItem name="cart">
       <i class="icon iconcart"></i>
       <span class="text">购物车</span>
     </tabbarItem>
-    <tabbarItem path="/profile">
+    <tabbarItem name="profile">
       <i class="icon iconprofile"></i>
       <span class="text">我的</span>
     </tabbarItem>

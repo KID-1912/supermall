@@ -16,13 +16,13 @@ const Detail = () => import('views/Detail/Detail');
 
 const router = new VueRouter({
   routes: [
-    {
-      path: "/",
-      redirect: "/home"
-    },
+    // {
+    //   path: "/",
+    //   redirect: "/home"
+    // },
     {
       name:'home',
-      path: '/home',
+      path: '/',
       component: Home,
     },{
       name:'category',
