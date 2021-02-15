@@ -13,7 +13,7 @@
     name: 'App',
     mounted(){
       window.addEventListener('resize',function () {
-        location.reload();
+        location.replace('http://xiyitao.top');
       })
     },
     components: {
