@@ -59,6 +59,14 @@
     display: inline-block;
     position: relative;
     margin-right: 10px;
+    width: 20px;height: 20px;
+    top: 4px;
+  }
+  .check-button ::v-deep img{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 4px;
     top: 4px;
   }
   .check-all{

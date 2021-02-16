@@ -150,7 +150,9 @@
   .scroll-wrapper{
     position: absolute;
     width: 100%;
-    top:44px;bottom:49px;
+    top:44px;
+    /*bottom:49px;*/
+    bottom:0;
   }
   .home-navbar{
     color:#fff;
