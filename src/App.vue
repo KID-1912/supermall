@@ -13,7 +13,7 @@
     name: 'App',
     mounted(){
       window.addEventListener('resize',function () {
-        window.location.replace('/supermall');
+        window.location.replace('/supermall/');
       })
     },
     components: {
