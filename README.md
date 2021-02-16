@@ -1,6 +1,7 @@
 # supermall
-
+[项目地址](http://xiyitao.top/supermall)
 [开发日志](https://kid-1912.github.io/2020/11/02/supermall%E5%95%86%E5%9F%8E/)
+
 
 ### node开发环境serve测试
 ```

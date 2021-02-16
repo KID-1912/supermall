@@ -26,5 +26,6 @@
 @import 'assets/css/base.css';
   #app{
     height: 100%;
+    max-width: ;
   }
 </style>
