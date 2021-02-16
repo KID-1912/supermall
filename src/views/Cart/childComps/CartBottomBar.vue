@@ -60,14 +60,11 @@
     position: relative;
     margin-right: 10px;
     top: 4px;
-    /*vertical-align: text-top;*/
-    /*vertical-align: sub;*/
   }
   .check-all{
     display: inline-block;
-    /*line-height: 1;*/
-    /*vertical-align: sub;*/
-    /*vertical-align: middle;*/
+    position: absolute;
+    top: 12px;
   }
   .totalprice{
     display: inline-block;

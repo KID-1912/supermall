@@ -11,7 +11,7 @@ module.exports = {
       minPixelValue: 1,
       mediaQuery: false,
       replace: true,
-      exclude: [/tabbar/],
+      exclude: [/tabbar/,/CartBottomBar/],
       include: undefined,
       landscape: false,
       landscapeUnit: 'vw',
